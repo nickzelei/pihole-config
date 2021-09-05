@@ -10,7 +10,7 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "67:67/udp"
+      #- "67:67/udp"
       - "80:80/tcp"
     env_file:
       - .env
@@ -28,12 +28,12 @@ services:
     #cap_add:
     #  - NET_ADMIN
     restart: unless-stopped
-  unbound:
-    container_name: unbound
-    image: mvance/unbound:1.13.2
-    ports:
-      - "5053:53/tcp"
-      - "5053:53/udp"
-    volumes:
-      - './unbound.conf:/opt/unbound/etc/unbound/unbound.conf'
-    restart: unless-stopped
+  #unbound:
+  #  container_name: unbound
+  #  image: mvance/unbound-rpi:1.13.1
+  #  ports:
+  #    - "5053:53/tcp"
+  #    - "5053:53/udp"
+  #  volumes:
+  #    - './unbound.conf:/opt/unbound/etc/unbound/unbound.conf'
+  #  restart: unless-stopped
