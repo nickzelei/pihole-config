@@ -14,7 +14,7 @@ services:
       - "80:80/tcp"
     env_file:
       - .env
-    environment:
+        #environment:
       # TZ: 'America/LosAngeles'
       # WEBPASSWORD: 'set a secure password here or it will be random'
     # Volumes store your data between container upgrades
