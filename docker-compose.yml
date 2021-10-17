@@ -1,40 +1,34 @@
-version: "3"
+version: '3'
 
-# https://github.com/pi-hole/docker-pi-hole/blob/master/README.md
+volumes:
+  etc_pihole-unbound:
+  etc_pihole_dnsmasq-unbound:
 
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:2021.10
-    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    image: cbcrowe/pihole-unbound:latest
+    hostname: ${HOSTNAME}
+    domainname: ${DOMAIN_NAME}
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      #- "67:67/udp"
-      - "80:80/tcp"
-    env_file:
-      - .env
-      - .env-secrets
-        #environment:
-      # TZ: 'America/LosAngeles'
-      # WEBPASSWORD: 'set a secure password here or it will be random'
-    # Volumes store your data between container upgrades
+      - 443:443/tcp
+      - 53:53/tcp
+      - 53:53/udp
+      - 80:80/tcp
+      # - 5335:5335/tcp # Uncomment to enable unbound access on local server
+      # - 22/tcp # Uncomment to enable SSH
+    environment:
+      ServerIP: ${ServerIP}
+      TZ: ${TZ}
+      WEBPASSWORD: ${WEBPASSWORD}
+      REV_SERVER: ${REV_SERVER}
+      REV_SERVER_TARGET: ${REV_SERVER_TARGET}
+      REV_SERVER_DOMAIN: ${REV_SERVER_DOMAIN}
+      REV_SERVER_CIDR: ${REV_SERVER_CIDR}
+      DNS1: 127.0.0.1#5335 # Hardcoded to our Unbound server
+      DNS2: 127.0.0.1#5335 # Hardcoded to our Unbound server
+      DNSSEC: "true" # Enable DNSSEC
     volumes:
-      - './etc-pihole/:/etc/pihole/'
-      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-      # run `touch ./var-log/pihole.log` first unless you like errors
-      # - './var-log/pihole.log:/var/log/pihole.log'
-    # Recommended but not required (DHCP needs NET_ADMIN)
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    #cap_add:
-    #  - NET_ADMIN
+      - etc_pihole-unbound:/etc/pihole:rw
+      - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
     restart: unless-stopped
-  #unbound:
-  #  container_name: unbound
-  #  image: mvance/unbound-rpi:1.13.1
-  #  ports:
-  #    - "5053:53/tcp"
-  #    - "5053:53/udp"
-  #  volumes:
-  #    - './unbound.conf:/opt/unbound/etc/unbound/unbound.conf'
-  #  restart: unless-stopped
