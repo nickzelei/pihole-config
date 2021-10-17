@@ -1,4 +1,4 @@
 env/
-.env
+.env-secrets
 etc-dnsmasq.d/
 etc-pihole/
