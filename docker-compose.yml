@@ -5,7 +5,7 @@ version: "3"
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:v5.8.1
+    image: pihole/pihole:2021.10
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
       - "53:53/tcp"
