@@ -7,7 +7,7 @@ volumes:
 services:
   pihole:
     container_name: pihole
-    image: cbcrowe/pihole-unbound:2021.12.1
+    image: cbcrowe/pihole-unbound:2022.01.1
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
@@ -25,8 +25,7 @@ services:
       REV_SERVER_TARGET: ${REV_SERVER_TARGET}
       REV_SERVER_DOMAIN: ${REV_SERVER_DOMAIN}
       REV_SERVER_CIDR: ${REV_SERVER_CIDR}
-      DNS1: 127.0.0.1#5335 # Hardcoded to our Unbound server
-      DNS2: 127.0.0.1#5335 # Hardcoded to our Unbound server
+      PIHOLE_DNS_: 127.0.0.1#5335
       DNSSEC: "true" # Enable DNSSEC
       #RATE_LIMIT: 0/0
     volumes:
