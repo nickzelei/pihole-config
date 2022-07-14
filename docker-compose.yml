@@ -7,7 +7,7 @@ volumes:
 services:
   pihole:
     container_name: pihole
-    image: cbcrowe/pihole-unbound:2022.02.1
+    image: cbcrowe/pihole-unbound:2022.07.1
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
@@ -18,7 +18,7 @@ services:
       # - 5335:5335/tcp # Uncomment to enable unbound access on local server
       # - 22/tcp # Uncomment to enable SSH
     environment:
-      ServerIP: ${ServerIP}
+      FTLCONF_REPLY_ADDR4: ${ServerIP}
       TZ: ${TZ}
       WEBPASSWORD: ${WEBPASSWORD}
       REV_SERVER: ${REV_SERVER}
@@ -26,7 +26,9 @@ services:
       REV_SERVER_DOMAIN: ${REV_SERVER_DOMAIN}
       REV_SERVER_CIDR: ${REV_SERVER_CIDR}
       PIHOLE_DNS_: 127.0.0.1#5335
-      DNSSEC: "true" # Enable DNSSEC
+      DNSSEC: ${DNSSEC}
+      WEBTHEME: ${WEBTHEME}
+      DNSMASQ_LISTENING: single
       #RATE_LIMIT: 0/0
     volumes:
       - etc_pihole-unbound:/etc/pihole:rw
