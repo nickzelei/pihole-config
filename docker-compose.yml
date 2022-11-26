@@ -18,10 +18,16 @@ services:
       # - 5335:5335/tcp # Uncomment to enable unbound access on local server
       # - 22/tcp # Uncomment to enable SSH
     environment:
-      TZ: America/LosAngeles
-      FTLCONF_REPLY_ADDR4: 192.168.0.10
-      WEBPASSWORD_FILE: /run/secrets/pihole_webpw
-      WEBTHEME: default-auto
+      - TZ=America/LosAngeles
+      - FTLCONF_REPLY_ADDR4=192.168.0.10
+      - WEBPASSWORD_FILE=/run/secrets/pihole_webpw
+      - WEBTHEME=default-auto
+      - PIHOLE_DNS_=127.0.0.1#5335
+      - REV_SERVER=true
+      - REV_SERVER_DOMAIN=local
+      - REV_SERVER_TARGET=192.168.0.1
+      - REV_SERVER_CIDR=192.168.0.0/24
+      - DNSMASQ_LISTENING=single # needed for exposure to other devices on network
     secrets:
       - pihole_webpw
     volumes:
