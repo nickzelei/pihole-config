@@ -5,3 +5,4 @@ etc-pihole/
 var-log
 etc_pihole-unbound
 etc_pihole_dnsmasq-unbound
+webpassword
