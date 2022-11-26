@@ -21,10 +21,7 @@ services:
       TZ: America/LosAngeles
       FTLCONF_REPLY_ADDR4: 192.168.0.10
       WEBPASSWORD_FILE: /run/secrets/pihole_webpw
-      HOSTNAME: pihole
-      DOMAIN_NAME: pihole.local
       WEBTHEME: default-auto
-      #DNSSEC: true
     secrets:
       - pihole_webpw
     volumes:
