@@ -7,7 +7,7 @@ volumes:
 services:
   pihole:
     container_name: pihole
-    image: cbcrowe/pihole-unbound:2022.11.2
+    image: cbcrowe/pihole-unbound:2022.12
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
@@ -19,7 +19,7 @@ services:
       # - 22/tcp # Uncomment to enable SSH
     environment:
       - TZ=America/LosAngeles
-      - FTLCONF_REPLY_ADDR4=192.168.0.10
+      - FTLCONF_LOCAL_IPV4=192.168.0.10
       - WEBPASSWORD_FILE=/run/secrets/pihole_webpw
       - WEBTHEME=default-auto
       - PIHOLE_DNS_=127.0.0.1#5335
