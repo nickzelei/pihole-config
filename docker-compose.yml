@@ -7,14 +7,14 @@ volumes:
 services:
   pihole:
     container_name: pihole
-    image: cbcrowe/pihole-unbound:2022.12
+    image: cbcrowe/pihole-unbound:2023.01.10
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
-      - 443:443/tcp
+      #- 443:443/tcp
       - 53:53/tcp
       - 53:53/udp
-      - 80:80/tcp
+      - "127.0.0.1:8080:80/tcp"
       # - 5335:5335/tcp # Uncomment to enable unbound access on local server
       # - 22/tcp # Uncomment to enable SSH
     environment:
@@ -34,6 +34,7 @@ services:
     volumes:
       - etc_pihole-unbound:/etc/pihole:rw
       - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
+      - ./custom-dns.list:/etc/pihole/custom.list
     restart: unless-stopped
 
 secrets:
