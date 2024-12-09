@@ -7,7 +7,7 @@ volumes:
 services:
   pihole:
     container_name: pihole
-    image: ghcr.io/nickzelei/pihole-unbound:2023.11.0
+    image: ghcr.io/nickzelei/pihole-unbound:2024.07.0
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
@@ -18,7 +18,7 @@ services:
       # - 5335:5335/tcp # Uncomment to enable unbound access on local server
       # - 22/tcp # Uncomment to enable SSH
     environment:
-      - TZ=America/LosAngeles
+      - TZ=America/Los_Angeles
       - FTLCONF_LOCAL_IPV4=192.168.0.10
       - WEBPASSWORD_FILE=/run/secrets/pihole_webpw
       - WEBTHEME=default-auto
