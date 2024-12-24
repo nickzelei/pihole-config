@@ -19,14 +19,14 @@ services:
       # - 22/tcp # Uncomment to enable SSH
     environment:
       - TZ=America/Los_Angeles
-      - FTLCONF_LOCAL_IPV4=192.168.0.10
+      - FTLCONF_LOCAL_IPV4=192.168.50.10
       - WEBPASSWORD_FILE=/run/secrets/pihole_webpw
       - WEBTHEME=default-auto
       - PIHOLE_DNS_=127.0.0.1#5335
       - REV_SERVER=true
       - REV_SERVER_DOMAIN=local
-      - REV_SERVER_TARGET=192.168.0.1
-      - REV_SERVER_CIDR=192.168.0.0/24
+      - REV_SERVER_TARGET=192.168.50.1
+      - REV_SERVER_CIDR=192.168.5.0/24
       - DNSMASQ_LISTENING=single # needed for exposure to other devices on network
       - FTLCONF_BLOCK_ICLOUD_PR=false
     secrets:
