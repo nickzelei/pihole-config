@@ -10,7 +10,7 @@ services:
       - "8080:80/tcp"
     environment:
       - TZ=America/Los_Angeles
-      - WEBPASSWORD_FILE=/run/secrets/pihole_webpw
+      - WEBPASSWORD_FILE=pihole_webpw
       - FTLCONF_webserver_interface_theme=default-auto
       - FTLCONF_dns_upstreams=1.1.1.1
       # - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
