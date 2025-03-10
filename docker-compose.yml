@@ -13,8 +13,7 @@ services:
       - WEBPASSWORD_file=pihole_webpw
       - FTLCONF_webserver_interface_theme=default-auto
       - FTLCONF_dns_upstreams=1.1.1.1
-      - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
-      - FTLCONF_dns_listeningMode=single
+      # - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
       - FTLCONF_BLOCK_ICLOUD_PR=false
       - FTLCONF_dns_listeningMode=all
     volumes:
