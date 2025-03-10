@@ -1,37 +1,34 @@
-version: "3"
-
-# volumes:
-# etc_pihole-unbound:
-# etc_pihole_dnsmasq-unbound:
-
 services:
   pihole:
     container_name: pihole
-    image: ghcr.io/nickzelei/pihole-unbound:2025.03.0
+    image: pihole/pihole:2025.03.0
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
-      #- 443:443/tcp
       - 53:53/tcp
       - 53:53/udp
       - "8080:80/tcp"
-      # - 5335:5335/tcp # Uncomment to enable unbound access on local server
-      # - 22/tcp # Uncomment to enable SSH
     environment:
       - TZ=America/Los_Angeles
       - FTLCONF_dns_interface=192.168.50.10
-      # - WEBPASSWORD_file=/run/secrets/pihole_webpw
       - WEBPASSWORD_file=pihole_webpw
       - FTLCONF_webserver_interface_theme=default-auto
-      - FTLCONF_dns_upstreams=127.0.0.1#5335
+      - FTLCONF_dns_upstreams=unbound#5335
       - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
       - FTLCONF_dns_listeningMode=single
-      # - FTLCONF_misc_etc_dnsmasq_d=true
       - FTLCONF_BLOCK_ICLOUD_PR=false
     secrets:
       - pihole_webpw
-    # volumes:
-    #   - etc_pihole-unbound:/etc/pihole:rw
+    restart: unless-stopped
+
+  unbound:
+    container_name: unbound
+    image: mvance/unbound:1.12.0
+    ports:
+      - "5335:5335/tcp"
+      - "5335:5335/udp"
+    volumes:
+      - ./unbound-conf:/opt/unbound/etc/unbound
     restart: unless-stopped
 
 secrets:
