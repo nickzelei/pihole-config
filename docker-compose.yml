@@ -10,7 +10,7 @@ services:
       - "8080:80/tcp"
     environment:
       - TZ=America/Los_Angeles
-      - WEBPASSWORD_file=pihole_webpw
+      - WEBPASSWORD_FILE=/run/secrets/pihole_webpw
       - FTLCONF_webserver_interface_theme=default-auto
       - FTLCONF_dns_upstreams=1.1.1.1
       # - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
@@ -18,7 +18,7 @@ services:
       - FTLCONF_dns_listeningMode=all
     volumes:
       # For persisting Pi-hole's databases and common configuration file
-      - "./etc-pihole:/etc/pihole"
+      - etc_pihole:/etc/pihole
     cap_add:
       # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
       # Required if you are using Pi-hole as your DHCP server, else not needed
@@ -44,3 +44,6 @@ services:
 secrets:
   pihole_webpw:
     file: webpassword
+
+volumes:
+  etc_pihole:
