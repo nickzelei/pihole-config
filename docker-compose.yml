@@ -1,13 +1,13 @@
-version: '3'
+version: "3"
 
-volumes:
-  etc_pihole-unbound:
-  etc_pihole_dnsmasq-unbound:
+# volumes:
+# etc_pihole-unbound:
+# etc_pihole_dnsmasq-unbound:
 
 services:
   pihole:
     container_name: pihole
-    image: ghcr.io/nickzelei/pihole-unbound:2024.07.0
+    image: ghcr.io/nickzelei/pihole-unbound:2025.03.0
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
@@ -19,22 +19,19 @@ services:
       # - 22/tcp # Uncomment to enable SSH
     environment:
       - TZ=America/Los_Angeles
-      - FTLCONF_LOCAL_IPV4=192.168.50.10
-      - WEBPASSWORD_FILE=/run/secrets/pihole_webpw
-      - WEBTHEME=default-auto
-      - PIHOLE_DNS_=127.0.0.1#5335
-      - REV_SERVER=true
-      - REV_SERVER_DOMAIN=local
-      - REV_SERVER_TARGET=192.168.50.1
-      - REV_SERVER_CIDR=192.168.5.0/24
-      - DNSMASQ_LISTENING=single # needed for exposure to other devices on network
+      - FTLCONF_dns_interface=192.168.50.10
+      # - WEBPASSWORD_file=/run/secrets/pihole_webpw
+      - WEBPASSWORD_file=pihole_webpw
+      - FTLCONF_webserver_interface_theme=default-auto
+      - FTLCONF_dns_upstreams=127.0.0.1#5335
+      - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
+      - FTLCONF_dns_listeningMode=single
+      # - FTLCONF_misc_etc_dnsmasq_d=true
       - FTLCONF_BLOCK_ICLOUD_PR=false
     secrets:
       - pihole_webpw
-    volumes:
-      - etc_pihole-unbound:/etc/pihole:rw
-      - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
-      - ./custom-dns.list:/etc/pihole/custom.list
+    # volumes:
+    #   - etc_pihole-unbound:/etc/pihole:rw
     restart: unless-stopped
 
 secrets:
