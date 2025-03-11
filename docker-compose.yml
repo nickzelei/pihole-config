@@ -29,6 +29,8 @@ services:
       - SYS_NICE
     secrets:
       - pihole_webpw
+    dns:
+      - 1.1.1.1
     restart: unless-stopped
 
   unbound:
