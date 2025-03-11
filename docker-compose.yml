@@ -40,7 +40,7 @@ services:
       - "5335:5335/tcp"
       - "5335:5335/udp"
     volumes:
-      - ./unbound-conf:/opt/unbound/etc/unbound
+      - ./unbound-conf:/opt/unbound/etc/unbound/unbound-conf
     restart: unless-stopped
 
 secrets:
