@@ -33,7 +33,7 @@ services:
 
   unbound:
     container_name: unbound
-    image: mvance/unbound:1.12.0
+    image: mvance/unbound${UNBOUND_IMAGE_SUFFIX}:1.22.0
     ports:
       - "5335:5335/tcp"
       - "5335:5335/udp"
