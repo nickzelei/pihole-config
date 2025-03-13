@@ -1,4 +1,4 @@
-# PiHole (v6) + Unbound
+# Pi-hole (v6) + Unbound
 
 This is a two container setup where pihole uses unbound as its upstream provider.
 
