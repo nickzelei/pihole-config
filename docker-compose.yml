@@ -37,8 +37,8 @@ services:
     container_name: unbound
     image: mvance/unbound${UNBOUND_IMAGE_SUFFIX}:1.22.0
     ports:
-      - "5335:5335/tcp"
-      - "5335:5335/udp"
+      - "5353:5353/tcp"
+      - "5353:5353/udp"
     volumes:
       - ./unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
     restart: unless-stopped
