@@ -2,8 +2,7 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:2025.03.0
-    hostname: ${HOSTNAME}
-    domainname: ${DOMAIN_NAME}
+    hostname: pihole
     ports:
       - 53:53/tcp
       - 53:53/udp
@@ -32,6 +31,8 @@ services:
     #dns:
     #  - 1.1.1.1
     restart: unless-stopped
+    networks:
+      - pihole
     depends_on:
       - unbound
 
@@ -44,6 +45,8 @@ services:
     volumes:
       - ./unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf:ro
     restart: unless-stopped
+    networks:
+      - pihole
 
 secrets:
   pihole_webpw:
@@ -51,3 +54,7 @@ secrets:
 
 volumes:
   etc_pihole:
+
+networks:
+  pihole:
+    driver: bridge
