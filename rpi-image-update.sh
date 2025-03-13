@@ -2,4 +2,4 @@
 
 docker compose pull
 docker compose down
-docker compose up -d
+UNBOUND_IMAGE_SUFFIX=-rpi docker compose up -d
