@@ -13,7 +13,7 @@ services:
       - FTLCONF_webserver_interface_theme=default-auto
       - FTLCONF_dns_upstreams=unbound#53
       # - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
-      - FTLCONF_BLOCK_ICLOUD_PR=false
+      - FTLCONF_BLOCK_ICLOUD_PR=true
       - FTLCONF_dns_listeningMode=all
     volumes:
       # For persisting Pi-hole's databases and common configuration file
