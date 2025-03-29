@@ -17,12 +17,3 @@ To pull images and restart:
 ```sh
 $ ./redeploy.sh
 ```
-
-If you're on a Raspberry Pi (or any arm machine), run:
-
-```sh
-$ ./arm-redeploy.sh
-```
-
-Unbound has discrete platform images, so the `arm-redeploy.sh` specifies the unbound-rpi image that that runs on arm devices.
-
