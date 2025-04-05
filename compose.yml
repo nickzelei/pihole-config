@@ -1,7 +1,7 @@
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:2025.03.0
+    image: pihole/pihole:2025.04.0
     hostname: pihole
     ports:
       - 53:53/tcp
@@ -12,11 +12,9 @@ services:
       - WEBPASSWORD_FILE=pihole_webpw
       - FTLCONF_webserver_interface_theme=default-auto
       - FTLCONF_dns_upstreams=unbound#53
-      # - FTLCONF_dns_revServers=true,192.168.50.0/24,192.168.50.1:53,local
       - FTLCONF_BLOCK_ICLOUD_PR=true
       - FTLCONF_dns_listeningMode=all
     volumes:
-      # For persisting Pi-hole's databases and common configuration file
       - etc_pihole:/etc/pihole
     cap_add:
       # See https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
@@ -28,8 +26,6 @@ services:
       - SYS_NICE
     secrets:
       - pihole_webpw
-    #dns:
-    #  - 1.1.1.1
     restart: unless-stopped
     networks:
       - pihole
