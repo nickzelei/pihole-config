@@ -10,14 +10,15 @@ else
   exit 1
 fi
 
-$COMPOSE_CMD pull
-$COMPOSE_CMD down
-
 ARCH=${DEPLOY_ARCH:-$(uname -m)}
 echo "Detected architecture: $ARCH"
 
 if [ "$ARCH" = "armv7l" ] || [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+  UNBOUND_IMAGE_SUFFIX=-rpi $COMPOSE_CMD pull
+  $COMPOSE_CMD down
   UNBOUND_IMAGE_SUFFIX=-rpi $COMPOSE_CMD up -d
 else
+  $COMPOSE_CMD pull
+  $COMPOSE_CMD down
   $COMPOSE_CMD up -d
 fi
