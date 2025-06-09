@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Determine which docker compose command to use
-if command -v docker-compose >/dev/null 2>&1; then
-  COMPOSE_CMD="docker-compose"
-elif docker compose version >/dev/null 2>&1; then
+if docker compose version >/dev/null 2>&1; then
   COMPOSE_CMD="docker compose"
+elif docker-compose --version >/dev/null 2>&1; then
+  COMPOSE_CMD="docker-compose"
 else
   echo "Error: Docker Compose not found." >&2
   exit 1
