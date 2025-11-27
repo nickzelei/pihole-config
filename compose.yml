@@ -1,7 +1,7 @@
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:2025.08.0
+    image: pihole/pihole:2025.11.1
     hostname: pihole
     ports:
       - 53:53/tcp
@@ -39,7 +39,7 @@ services:
       - "5335:53/tcp"
       - "5335:53/udp"
     volumes:
-      - ./unbound/:/opt/unbound/etc/unbound/
+      - ./unbound/unbound.conf:/opt/unbound/etc/unbound/unbound.conf:ro
     restart: unless-stopped
     networks:
       - pihole
