@@ -29,7 +29,7 @@ docker compose up -d
 
 ### Pull latest images and restart
 ```sh
-./redeploy.sh
+./deploy.sh
 ```
 
 ### View logs
@@ -73,6 +73,6 @@ To set up from scratch:
 
 ## Architecture-Specific Deployment
 
-The `redeploy.sh` script auto-detects CPU architecture:
+The `deploy.sh` script auto-detects CPU architecture:
 - ARM platforms (armv7l, aarch64, arm64): Uses `mvance/unbound-rpi` image
 - x86/64 platforms: Uses `mvance/unbound` image
