@@ -68,7 +68,23 @@ To start:
 $ docker compose up -d
 ```
 
-To pull images and restart:
+## Redeploy Script
+
+The `redeploy.sh` script handles pulling images, stopping containers, and restarting them. It automatically detects your CPU architecture and uses the appropriate Unbound image (ARM vs x86/64).
+
+**Pull latest images and restart:**
 ```sh
 $ ./redeploy.sh
+```
+
+**Restart without pulling images** (useful for config changes):
+```sh
+$ ./redeploy.sh -s
+# or
+$ ./redeploy.sh --skip-pull
+```
+
+**Show help:**
+```sh
+$ ./redeploy.sh --help
 ```
